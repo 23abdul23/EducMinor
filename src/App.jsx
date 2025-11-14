@@ -1,33 +1,80 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useEffect, useRef, useState } from "react";
+import { Route, Routes, Navigate, Outlet, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
-function App() {
-  const [count, setCount] = useState(0)
 
+import Home from "./views/Home";
+import AdminLogin from "./views/AdminLogin";
+import Issue from "./views/Issue";
+import Retrieve from "./views/Retrieve";
+import CertificateTemplate from "./views/CertificateTemplate";
+import Certificates from "./views/Certificates";
+import UserLogin from "./views/UserLogin";
+import UserCertificates from "./views/UserCertificates";
+import VerifyCertificate from "./views/VerifyCertificate";
+
+const backendBaseUrl = import.meta.env.VITE_BACKEND_URL ?? "http://localhost:4000";
+
+
+const HomeRedirect = () => {
+  const navigate = useNavigate();
+  const [redirected, setRedirected] = useState(false);
+
+  useEffect(() => {
+    if (redirected) return;
+    const role =
+      typeof window !== "undefined"
+        ? window.sessionStorage.getItem("authRole")
+        : null;
+
+    console.log("🔁 Redirecting based on role:", role);
+
+    if (role === "user") navigate("/user", { replace: true });
+    else navigate("/admin", { replace: true });
+
+    setRedirected(true);
+  }, [navigate, redirected]);
+
+  return null;
+};
+
+const ProtectedRoute = ({ allowedRole, redirectTo }) => {
+  const navigate = useNavigate();
+  const [hasNavigated, setHasNavigated] = useState(false);
+
+  useEffect(() => {
+    const role =
+      typeof window !== "undefined"
+        ? window.sessionStorage.getItem("authRole")
+        : null;
+
+    if (hasNavigated) return;
+    console.log(
+      `🛡️ Checking access for role "${role}" (allowed: ${allowedRole})`
+    );
+
+    if (!role) {
+      setHasNavigated(true);
+      navigate(redirectTo, { replace: true });
+      return;
+    }
+
+    if (role !== allowedRole) {
+      setHasNavigated(true);
+      navigate(role === "admin" ? "/admin" : "/user", { replace: true });
+    }
+  }, [allowedRole, redirectTo, navigate, hasNavigated]);
+
+  return <Outlet />;
+};
+
+
+
+const App = () => {
+  
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      
     </>
   )
 }
