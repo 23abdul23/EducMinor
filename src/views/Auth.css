@@ -1,0 +1,21 @@
+.auth-shell {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: #fff;
+  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.1);
+}
+
+.auth-shell form,
+.auth-shell section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-shell input,
+.auth-shell button {
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+}
