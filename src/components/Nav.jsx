@@ -1,10 +1,10 @@
 import React, { useMemo, useCallback, useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-// import {
-//   useWeb3AuthConnect,
-//   useWeb3AuthDisconnect,
-// } from "@web3auth/modal/react";
-// import { useAccount } from "wagmi";
+import {
+  useWeb3AuthConnect,
+  useWeb3AuthDisconnect,
+} from "@web3auth/modal/react";
+import { useAccount } from "wagmi";
 
 const Nav = ({ cmp }) => {
   const navigate = useNavigate();
