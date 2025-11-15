@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import certificate from "../assets/certificate_form.png";
+
 import axios from "axios";
 import { mintNFT } from "../SmartContract";
 
@@ -165,11 +165,8 @@ const MyForm = ({ cmp }) => {
   return (
     <div className="flex items-center rounded-l-lg w-3/4 bg-[#ECECEC]">
       <div className="flex justify-center w-1/2 items-center">
-        <img
-          className="rotate-12 bg-contain select-none"
-          src={certificate}
-          alt=""
-        />
+       
+      
       </div>
       <div className="bg-white rounded-r-lg w-1/2">
         <form action="" className="p-5">

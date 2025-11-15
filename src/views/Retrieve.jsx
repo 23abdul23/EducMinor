@@ -1,8 +1,12 @@
-const Retrieve = () => (
-  <section className="section-placeholder">
-    <h2>Retrieve Certificate</h2>
-    <p>Hook up certificate retrieval logic here.</p>
-  </section>
-)
+import React from "react";
+import Nav from "../components/Nav";
 
-export default Retrieve
+const Retrieve = () => {
+    return (
+        <div>
+            <Nav cmp={"retrieve"} />
+        </div>
+    );
+};
+
+export default Retrieve;

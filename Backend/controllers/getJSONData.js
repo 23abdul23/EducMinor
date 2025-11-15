@@ -1,61 +1,71 @@
-import axios from 'axios'
-import User from '../models/User.js'
+import axios from "axios";
+import User from "../models/User.js";
 
-export const getJSONData = async (req, res) => {
-  const { jsonCID } = req.params
+export const getJSONData = async (req, res, next) => {
+    const jsonCID = req.params.jsonCID;
+    const endpointUrl = `https://gateway.pinata.cloud/ipfs/${jsonCID}`;
 
-  if (!jsonCID) {
-    res.status(400).json({ message: 'IPFS hash is required' })
-    return
-  }
+    axios
+        .get(endpointUrl)
+        .then((response) => {
+            console.log(response.data); 
+            res.send(response.data);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+};
 
-  try {
-    const endpointUrl = `https://gateway.pinata.cloud/ipfs/${jsonCID}`
-    const response = await axios.get(endpointUrl)
-    res.json(response.data)
-  } catch (error) {
-    res.status(500).json({ message: 'Unable to fetch certificate JSON', error: error.message })
-  }
-}
-
-export const mapEmail = async (req, res) => {
-  const { email } = req.body
-
-  if (!email) {
-    res.status(422).json({ message: 'Email is required', wallet_address: null })
-    return
-  }
-
-  try {
-    const user = await User.findOne({ email_id: email }).lean()
-    if (!user) {
-      res.status(404).json({ message: 'No record found', wallet_address: null })
-      return
+export const mapEmail=async (req,res)=>{
+    const {email} =req.body
+    if(!email){
+        return res.status(202).json({
+        message: "Enter Email",
+        wallet_address: null,
+      });
     }
 
-    res.json({ wallet_address: user.wallet_address ?? null })
-  } catch (error) {
-    res.status(500).json({ message: 'Unable to map email to wallet', error: error.message })
-  }
+    try {
+        const user=await User.findOne({"email_id":email}).lean()
+        if(!user){
+            return res.status(400).json({message:"No email found", wallet_address: null,})
+        }
+        if(!user.wallet_address){
+             return res.status(202).json({
+             message: "User found but wallet not yet generated",
+             wallet_address: null,
+         });
+        }
+        const wallAdd=user.wallet_address
+        return res.status(200).json({wallAdd:wallAdd})
+    } catch (error) {
+        console.log("Error:",error)
+        return res.status(500).json({ message: "Server error in mapping email", error: error.message });
+    }
 }
 
-export const addAddress = async (req, res) => {
-  const { email, address } = req.body
-
-  if (!email || !address) {
-    res.status(422).json({ message: 'Email and wallet address are required' })
-    return
-  }
-
-  try {
-    const user = await User.findOneAndUpdate(
-      { email_id: email },
-      { $setOnInsert: { email_id: email }, wallet_address: address },
-      { upsert: true, new: true }
-    )
-
-    res.json({ message: 'Wallet address saved', user })
-  } catch (error) {
-    res.status(500).json({ message: 'Unable to store wallet address', error: error.message })
-  }
+export const addAddress=async (req,res)=>{
+    const {email,address}=req.body
+     if(!email || !address){
+        return res.status(202).json({
+        message: "Enter Email",
+        wallet_address: null,
+      });
+     }
+    try {
+        const user = await User.findOne({"email_id":email})
+        if(user && user.wallet_address){
+            return res.status(200).json({message:"Aldready set!"})
+        }
+        if(!user){
+            const newUser = await new User({"email_id":email,"wallet_address":address,"role":"user"}).save()
+            return res.status(200).json({message:"Added to Database!"})
+            
+        }
+        user.wallet_address = address;
+        await user.save();
+    } catch (error) {
+         console.log("Error:",error)
+        return res.status(500).json({ message: "Server error in adding user", error: error.message });
+    }
 }
