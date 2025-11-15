@@ -1,10 +1,16 @@
-import MyForm from '../components/MyForm'
+import React from "react";
+import MyForm from "../components/MyForm";
+import Nav from "../components/Nav";
 
-const Issue = () => (
-  <section className="section-placeholder">
-    <h2>Issue Certificate</h2>
-    <MyForm />
-  </section>
-)
+const Issue = () => {
+    return (
+        <div>
+            <Nav cmp={"issue"} />
+            <div className='flex justify-center mt-10'>
+                <MyForm cmp={"issue"} />
+            </div>
+        </div>
+    );
+};
 
-export default Issue
+export default Issue;
