@@ -6,6 +6,8 @@ const Nav = () => {
         <span className="hover:text-slate-900 cursor-pointer">Home</span>
         <span className="hover:text-slate-900 cursor-pointer">Certificates</span>
         <span className="hover:text-slate-900 cursor-pointer">Issue</span>
+        <span className="hover:text-slate-900 cursor-pointer">Recruiter</span>
+        <span className="hover:text-slate-900 cursor-pointer">Interviewer</span>
       </div>
     </div>
   )
