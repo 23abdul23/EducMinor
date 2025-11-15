@@ -1,6 +1,6 @@
-# LegitCred – Blockchain Credential Issuance Platform
+# Axiom – Blockchain Credential Issuance Platform
 
-LegitCred (a.k.a. **EducMinor**) is a full-stack system that lets institutions issue tamper-proof academic or professional certificates as ERC‑721 NFTs. Certificates are uploaded as PDFs, summarized automatically through an OCR + Groq agent, pinned to IPFS (Pinata), and minted to the recipient’s wallet on Sepolia. Web3Auth secures both admin and learner flows with familiar OAuth logins, while a lightweight Express + Mongo backend keeps an email→wallet registry in sync. Recipients can view all of their credentials in one place, and anyone can verify authenticity through a shareable `/verify/:tokenId` route.
+Axiom (a.k.a. **EducMinor**) is a full-stack system that lets institutions issue tamper-proof academic or professional certificates as ERC‑721 NFTs. Certificates are uploaded as PDFs, summarized automatically through an OCR + Groq agent, pinned to IPFS (Pinata), and minted to the recipient’s wallet on Sepolia. Web3Auth secures both admin and learner flows with familiar OAuth logins, while a lightweight Express + Mongo backend keeps an email→wallet registry in sync. Recipients can view all of their credentials in one place, and anyone can verify authenticity through a shareable `/verify/:tokenId` route.
 
 ---
 
@@ -22,13 +22,13 @@ LegitCred (a.k.a. **EducMinor**) is a full-stack system that lets institutions i
 
 ## Features
 - **Self-serve admin console** – Issue certificates by uploading merged PDFs, tagging the event/organization, and entering the recipient’s email.
-- **On-chain minting** – Every issuance stores the certificate + metadata CID on IPFS and mints an ERC‑721 (LegitCred/Axiom contracts) on Sepolia.
+- **On-chain minting** – Every issuance stores the certificate + metadata CID on IPFS and mints an ERC‑721 (Axiom/Axiom contracts) on Sepolia.
 - **Web3Auth-powered access** – Admins and recipients log in with Google (or any supported OAuth provider) via Web3Auth, and wallets are managed automatically.
 - **Email ↔ wallet registry** – Express/Mongo backend persists the mapping so admins only need an email address; wallet addresses are synced once the learner signs in.
 - **Automated OCR summaries** – FastAPI service extracts/summarizes the PDF (Groq Llama‑3.1) and embeds the synopsis into the metadata for richer verification.
 - **User dashboard** – Learners can see all NFTs minted to their wallet, download PDFs, and copy shareable `/verify/:tokenId` URLs.
 - **Public verification** – Verifiers can inspect metadata, summaries, issue dates, and on-chain owners, and compare metadata wallet vs. current owner.
-- **Modular smart contracts** – Solidity contracts (Axiom / legitCred) deployed with Hardhat; easily extend revocation or custom attributes.
+- **Modular smart contracts** – Solidity contracts (Axiom / Axiom) deployed with Hardhat; easily extend revocation or custom attributes.
 
 ---
 
@@ -133,7 +133,7 @@ VITE_CONTRACT_ABI=<JSON-string or switch SmartContract/index.js to import from a
 
 ### `Backend/.env`
 ```ini
-MONGO_URI=mongodb+srv://<user>:<pass>@cluster.mongodb.net/legitcred
+MONGO_URI=mongodb+srv://<user>:<pass>@cluster.mongodb.net/Axiom
 PORT=4000
 ```
 
