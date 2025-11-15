@@ -1,15 +1,39 @@
+import { Link, useLocation } from 'react-router-dom'
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/admin/certificates', label: 'Certificates' },
+  { href: '/admin/issue-certificate', label: 'Issue' },
+]
+
 const Nav = () => {
+  const location = useLocation()
+
   return (
-    <div className="flex justify-between items-center px-6 py-4 bg-white/80 backdrop-blur border-b border-gray-200 shadow-sm">
-      <div className="text-xl font-semibold text-slate-800">Minor2</div>
-      <div className="flex gap-4 text-sm text-slate-600">
-        <span className="hover:text-slate-900 cursor-pointer">Home</span>
-        <span className="hover:text-slate-900 cursor-pointer">Certificates</span>
-        <span className="hover:text-slate-900 cursor-pointer">Issue</span>
-        <span className="hover:text-slate-900 cursor-pointer">Recruiter</span>
-        <span className="hover:text-slate-900 cursor-pointer">Interviewer</span>
+    <nav className="flex justify-between items-center px-6 py-4 bg-white/80 backdrop-blur border-b border-gray-200 shadow-sm">
+      <div className="text-xl font-semibold text-slate-800">Team Miners</div>
+      <div className="flex gap-4 text-sm text-slate-700">
+        {navLinks.map((link) => {
+          const isActive =
+            location.pathname === link.href ||
+            (link.href !== '/' && location.pathname.startsWith(link.href))
+
+          return (
+            <Link
+              key={link.href}
+              to={link.href}
+              className={`px-2 py-1 rounded transition-colors ${
+                isActive
+                  ? 'text-slate-900 bg-slate-100 border border-slate-200'
+                  : 'hover:text-slate-900'
+              }`}
+            >
+              {link.label}
+            </Link>
+          )
+        })}
       </div>
-    </div>
+    </nav>
   )
 }
 
