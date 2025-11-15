@@ -8,7 +8,7 @@ import {
   Web3AuthProvider,
   useWeb3Auth,
   useWeb3AuthConnect,
-} from "@web3auth/modal/react";
+} from "@web3auth/modal-react-hooks";
 import { WagmiProvider } from "@web3auth/modal/react/wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import web3AuthContextConfig from "./auth/web3authContext";
