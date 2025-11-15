@@ -16,7 +16,7 @@ import { getCount, getMetaData, getOwnerOf } from "./SmartContract";
 import axios from "axios";
 import { certificateActions } from "./store/certificate-slice";
 
-import { useWeb3AuthConnect, useWeb3AuthUser } from "@web3auth/modal/react";
+import { useWeb3AuthConnect, useWeb3AuthUser } from "@web3auth/modal-react-hooks";
 import { useAccount } from "wagmi";
 
 const backendBaseUrl = import.meta.env.VITE_BACKEND_URL ?? "http://localhost:4000";

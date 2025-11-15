@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useWeb3AuthConnect, useWeb3AuthUser } from "@web3auth/modal/react";
+import { useWeb3AuthConnect, useWeb3AuthUser } from "@web3auth/modal-react-hooks";
 import { useAccount } from "wagmi";
 import "./Auth.css";
 

@@ -8,8 +8,10 @@ import {
   Web3AuthProvider,
   useWeb3Auth,
   useWeb3AuthConnect,
-} from "@web3auth/modal/react";
-import { WagmiProvider } from "@web3auth/modal/react/wagmi";
+} from "@web3auth/modal-react-hooks";
+import { configureChains, createConfig, WagmiConfig, publicProvider } from "wagmi";
+import { mainnet } from "wagmi/chains";
+import { web3AuthConnector } from "@web3auth/web3auth-wagmi-connector";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import web3AuthContextConfig from "./auth/web3authContext";
 
@@ -95,11 +97,34 @@ function Web3AuthDebugWrapper() {
 const Root = () => (
   <Web3AuthProvider config={web3AuthContextConfig}>
     <QueryClientProvider client={queryClient}>
-      <WagmiProvider>
+      {/* Wagmi configuration (replaces removed WagmiProvider from Web3Auth v5) */}
+      <WagmiConfig
+        config={(() => {
+          const { chains, publicClient } = configureChains(
+            [mainnet],
+            [publicProvider()]
+          );
+
+          return createConfig({
+            autoConnect: false,
+            connectors: [
+              web3AuthConnector({
+                chains,
+                options: {
+                  clientId: web3AuthContextConfig.web3AuthOptions.clientId,
+                  web3AuthNetwork:
+                    web3AuthContextConfig.web3AuthOptions.web3AuthNetwork,
+                },
+              }),
+            ],
+            publicClient,
+          });
+        })()}
+      >
         <Provider store={store}>
           <Web3AuthDebugWrapper />
         </Provider>
-      </WagmiProvider>
+      </WagmiConfig>
     </QueryClientProvider>
   </Web3AuthProvider>
 );
