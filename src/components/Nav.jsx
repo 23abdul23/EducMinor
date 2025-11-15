@@ -4,6 +4,9 @@ const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/admin/certificates', label: 'Certificates' },
   { href: '/admin/issue-certificate', label: 'Issue' },
+  { href: '/recruiter', label: 'Recruiter' },
+  { href: '/interviewer', label: 'Interviewer' },
+
 ]
 
 const Nav = () => {
@@ -11,7 +14,7 @@ const Nav = () => {
 
   return (
     <nav className="flex justify-between items-center px-6 py-4 bg-white/80 backdrop-blur border-b border-gray-200 shadow-sm">
-      <div className="text-xl font-semibold text-slate-800">Team Miners</div>
+      <div className="text-xl font-semibold text-slate-800">Miners, Not Minors</div>
       <div className="flex gap-4 text-sm text-slate-700">
         {navLinks.map((link) => {
           const isActive =
