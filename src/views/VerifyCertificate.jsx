@@ -70,8 +70,10 @@ const VerifyCertificate = () => {
       cancel = true;
     };
   }, [tokenId]);
+  console.log("Metadata:", metadata);
 
   const issuedWallet = metadata?.walletAddress?.toLowerCase();
+  const summary = metadata?.summary;
   const ownershipMatches =
     issuedWallet && owner ? issuedWallet === owner : true;
   const formattedIssueDate = useMemo(() => {
@@ -150,6 +152,12 @@ const VerifyCertificate = () => {
                   <dt className="text-gray-500">Issue Date</dt>
                   <dd className="text-gray-900">
                     {formattedIssueDate || "Unknown"}
+                  </dd>
+                </div>
+                 <div>
+                  <dt className="text-gray-500">Summary</dt>
+                  <dd className="text-gray-900">
+                    {summary || "Not provided"}
                   </dd>
                 </div>
                 <div className="pt-2 border-t border-gray-100">

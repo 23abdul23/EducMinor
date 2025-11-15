@@ -14,6 +14,7 @@ const MyForm = ({ cmp }) => {
     const [email,setEmail]=useState("")
     const [pdfData, setPDFData] = useState("");
     const [isRun,setIsRun]=useState(false)
+    const [summary,setSummary]=useState("")
     const certificateInput = useRef();
     const { address: adminWallet } = useAccount();
     const normalizedAdminWallet = adminWallet?.toLowerCase() ?? "";
@@ -101,16 +102,45 @@ const MyForm = ({ cmp }) => {
             pinata_secret_api_key: SECRET_KEY,
         };
 
+        let generatedSummary = summary;
+        const uploadedFile = formData.get("file");
+        if (uploadedFile) {
+            const ocrFormData = new FormData();
+            // provide filename so FastAPI treats it as UploadFile
+            ocrFormData.append(
+                "file",
+                uploadedFile,
+                certificateName || uploadedFile.name || "certificate.pdf"
+            );
+            try {
+                const ocrRes = await axios.post(
+                    "http://localhost:8000/ocr",
+                    ocrFormData,
+                    {
+                        headers: { "Content-Type": "multipart/form-data" },
+                    }
+                );
+                console.log("OCR summary generated:", ocrRes.data);
+                generatedSummary = ocrRes.data.summary || "";
+                setSummary(generatedSummary);
+            } catch (ocrError) {
+                console.warn("Unable to fetch OCR summary", ocrError);
+            }
+        }
+
+
         const metaData = {
             name: participantName,
             issue_date: new Date().toISOString(),
             organization,
             event,
+            summary: generatedSummary,
             walletAddress: mappedWalletAddress,
             issuerWallet: normalizedAdminWallet,
         };
         console.log("Prepared certificate metadata payload:", metaData);
 
+       
         try {
             const res = await axios.post(url, formData, { headers });
             setCertificateCID(res.data.IpfsHash);
