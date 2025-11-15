@@ -1,0 +1,103 @@
+[
+  {
+    "id": "c1",
+    "name": "Alice Johnson",
+    "title": "Full Stack Developer",
+    "location": "Remote",
+    "skills": ["React", "Node", "Solidity"],
+    "certificates": [
+      {
+        "name": "Ethereum Smart Contract Developer",
+        "issuer": "ChainEd",
+        "date": "2024-09-12",
+        "metaData": {
+          "name": "Alice Johnson",
+          "issue_date": "2024-09-12T00:00:00.000Z",
+          "organization": "ChainEd",
+          "skills": ["Solidity"],
+          "event": "Smart Contract Bootcamp",
+          "walletAddress": "0xAbC123..."
+        }
+      },
+      {
+        "name": "Fullstack Web Dev",
+        "issuer": "OpenCourse",
+        "date": "2023-06-01",
+        "metaData": {
+          "name": "Alice Johnson",
+          "issue_date": "2023-06-01T00:00:00.000Z",
+          "organization": "OpenCourse",
+          "skills": ["React", "Node"],
+          "event": "Fullstack Cohort 5",
+          "walletAddress": "0xAbC123..."
+        }
+      }
+    ]
+  },
+  {
+    "id": "c2",
+    "name": "Bilal Ahmed",
+    "title": "Blockchain Engineer",
+    "location": "Lagos, NG",
+    "skills": ["Solidity", "Hardhat", "JavaScript"],
+    "certificates": [
+      {
+        "name": "Smart Contracts with Hardhat",
+        "issuer": "DevBootcamp",
+        "date": "2025-01-10",
+        "metaData": {
+          "name": "Bilal Ahmed",
+          "issue_date": "2025-01-10T00:00:00.000Z",
+          "organization": "DevBootcamp",
+          "skills": ["Solidity", "Hardhat"],
+          "event": "Hardhat Intensive",
+          "walletAddress": "0xBilalWallet..."
+        }
+      }
+    ]
+  },
+  {
+    "id": "c3",
+    "name": "Carla Mendes",
+    "title": "Frontend Engineer",
+    "location": "Lisbon, PT",
+    "skills": ["React", "TypeScript", "Tailwind"],
+    "certificates": [
+      {
+        "name": "Advanced React",
+        "issuer": "Frontend Masters",
+        "date": "2022-11-20",
+        "metaData": {
+          "name": "Carla Mendes",
+          "issue_date": "2022-11-20T00:00:00.000Z",
+          "organization": "Frontend Masters",
+          "skills": ["React", "TypeScript"],
+          "event": "React Advanced Series",
+          "walletAddress": "0xCarlaWallet..."
+        }
+      }
+    ]
+  },
+  {
+    "id": "c4",
+    "name": "Daniel Kim",
+    "title": "Cloud Engineer",
+    "location": "Seoul, KR",
+    "skills": ["AWS", "Docker", "Kubernetes"],
+    "certificates": [
+      {
+        "name": "AWS Solutions Architect",
+        "issuer": "Amazon",
+        "date": "2021-05-14",
+        "metaData": {
+          "name": "Daniel Kim",
+          "issue_date": "2021-05-14T00:00:00.000Z",
+          "organization": "Amazon",
+          "skills": ["AWS"],
+          "event": "AWS Certification",
+          "walletAddress": "0xDanWallet..."
+        }
+      }
+    ]
+  }
+]
