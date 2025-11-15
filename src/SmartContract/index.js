@@ -1,6 +1,6 @@
 import contract from "./abi.json";
 import { ethers } from "ethers";
-const contractAddress = "0x23cB9cC6125DD5b83E5b8D94d7c45D0B123e0a0A";
+const contractAddress = "0x6756C049f79C97Cdd176352B9a38546A2068aE95";
 
 const infuraProvider = new ethers.providers.JsonRpcProvider(
     "https://eth-sepolia.g.alchemy.com/v2/zEotRHIHt762GqCfnaj6tDD0ZH-GswVB"

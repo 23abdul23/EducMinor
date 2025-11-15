@@ -70,7 +70,7 @@ const Nav = ({ cmp }) => {
             Issue Certificate
           </Link>
           <Link
-            // to="/admin/certificates"
+            to="/admin/certificates"
             className={`mx-4 hover:text-[#2104ae] hover:cursor-pointer ${
               cmp === "certificates" ? "underline" : ""
             }`}
