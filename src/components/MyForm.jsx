@@ -83,6 +83,17 @@ const MyForm = ({ cmp }) => {
             body: JSON.stringify({ email }),
         });
         const data = await res.json();
+    try {
+
+      //formData  = formData.append("file", blob, certificateName);
+      console.log('Blob of file: ', formData.file)
+
+      const ocr_res = await axios.post('http://127.0.0.1:8000', formData.file)
+
+      console.log('Receved summary metdata', ocr_res.data)
+
+      const res = await axios.post(url, formData, { headers });
+      setCertificateCID(res.data.IpfsHash);
 
         if (!res.ok || !data?.wallAdd) {
             const reason =

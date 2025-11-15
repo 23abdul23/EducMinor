@@ -1,0 +1,8 @@
+pdf2image
+pillow
+pytesseract
+requests
+
+# Notes:
+# - On Windows, install poppler and set POPPLER_PATH env var to the directory containing pdftoppm.
+# - Install Tesseract OCR on your system and ensure it's on PATH (or set TESSERACT_CMD for pytesseract).

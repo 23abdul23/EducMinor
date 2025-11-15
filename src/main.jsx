@@ -95,11 +95,34 @@ function Web3AuthDebugWrapper() {
 const Root = () => (
   <Web3AuthProvider config={web3AuthContextConfig}>
     <QueryClientProvider client={queryClient}>
-      <WagmiProvider>
+      {/* Wagmi configuration (replaces removed WagmiProvider from Web3Auth v5) */}
+      <WagmiConfig
+        config={(() => {
+          const { chains, publicClient } = configureChains(
+            [mainnet],
+            [publicProvider()]
+          );
+
+          return createConfig({
+            autoConnect: false,
+            connectors: [
+              web3AuthConnector({
+                chains,
+                options: {
+                  clientId: web3AuthContextConfig.web3AuthOptions.clientId,
+                  web3AuthNetwork:
+                    web3AuthContextConfig.web3AuthOptions.web3AuthNetwork,
+                },
+              }),
+            ],
+            publicClient,
+          });
+        })()}
+      >
         <Provider store={store}>
           <Web3AuthDebugWrapper />
         </Provider>
-      </WagmiProvider>
+      </WagmiConfig>
     </QueryClientProvider>
   </Web3AuthProvider>
 );
